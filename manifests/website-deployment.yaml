@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecom-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ecom-web
+  template:
+    metadata:
+      labels:
+        app: ecom-web
+    spec:
+      containers:
+      - name: ecom-web
+        image: ariyonaty/ecom-web:v1
+        ports:
+        - containerPort: 80
+        env:
+        - name: DB_HOST
+          value: ecom-db
+        - name: DB_USER
+          value: ecomuser
+        - name: DB_PASSWORD
+          value: ecompassword
+        - name: DB_NAME
+          value: ecomdb
