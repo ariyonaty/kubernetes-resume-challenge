@@ -1,0 +1,22 @@
+---
+services:
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    restart: unless-stopped
+    environment:
+      - MARIADB_ROOT_PASSWORD=ecompassword
+    volumes:
+      - ./sql/:/docker-entrypoint-initdb.d
+    ports:
+    - 3306:3306
+  web:
+    image: ariyonaty/ecom-web:v1
+    container_name: web
+    ports:
+      - 80:80
+    environment:
+      - DB_HOST=mariadb
+      - DB_USER=ecomuser
+      - DB_PASSWORD=ecompassword
+      - DB_NAME=ecomdb
