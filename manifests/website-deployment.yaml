@@ -19,13 +19,25 @@ spec:
         - containerPort: 80
         env:
         - name: DB_HOST
-          value: ecom-db
+          valueFrom:
+            secretKeyRef:
+              name: db-info
+              key: hostname
         - name: DB_USER
-          value: ecomuser
+          valueFrom:
+            secretKeyRef:
+              name: db-info
+              key: username
         - name: DB_PASSWORD
-          value: ecompassword
+          valueFrom:
+            secretKeyRef:
+              name: db-info
+              key: password
         - name: DB_NAME
-          value: ecomdb
+          valueFrom:
+            secretKeyRef:
+              name: db-info
+              key: dbname
         - name: FEATURE_DARK_MODE
           valueFrom:
             configMapKeyRef:
