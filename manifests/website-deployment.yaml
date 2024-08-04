@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: ecom-web
-        image: ariyonaty/ecom-web:v1
+        image: ariyonaty/ecom-web:v2
         ports:
         - containerPort: 80
         env:
@@ -26,3 +26,8 @@ spec:
           value: ecompassword
         - name: DB_NAME
           value: ecomdb
+        - name: FEATURE_DARK_MODE
+          valueFrom:
+            configMapKeyRef:
+              name: feature-toggle-config
+              key: FEATURE_DARK_MODE
